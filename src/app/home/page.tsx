@@ -2,15 +2,14 @@
 import React, { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import Yespage from "../yes/page";
 
-export default function Homepage() {
+function HomepageContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [selectedName, setSelectedName] = useState("");
 
-    const handleFileChange = (e) => {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files || e.target.files.length === 0) {
             setSelectedFile(null);
             return;
@@ -68,5 +67,13 @@ export default function Homepage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function Homepage() {
+    return (
+        <React.Suspense fallback={null}>
+            <HomepageContent />
+        </React.Suspense>
     );
 }

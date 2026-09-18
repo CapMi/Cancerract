@@ -34,3 +34,26 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Hosting (GitHub Pages)
+
+Every page in this app is client-side only, so it is built as a static export
+(`output: "export"` in `next.config.ts`) and published by
+`.github/workflows/deploy-pages.yml`.
+
+Use **yarn** for this project - `yarn.lock` is the lock file that matches `package.json`
+(`package-lock.json` is out of sync and `npm install` currently fails on a peer conflict).
+
+```bash
+yarn install          # install dependencies (required before `yarn dev`)
+yarn dev              # http://localhost:3000
+PAGES_BASE_PATH=/<repo> yarn build   # static site -> out/
+```
+
+To publish a copy of this app:
+
+1. Fork the repository (Pages needs a repository you can push to).
+2. In the fork: **Settings > Pages > Build and deployment > Source: GitHub Actions**.
+3. Push to `main`, or run the **Deploy to GitHub Pages** workflow manually.
+4. `configure-pages` publishes the site to `https://<owner>.github.io/<repo>/`.
+   The workflow passes `PAGES_BASE_PATH=/<repo>` so assets resolve under that sub-path.
+

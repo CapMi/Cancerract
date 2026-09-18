@@ -30,7 +30,7 @@ body {
 
 .app {
   width: 100vw;
-  height: 50vh;
+  min-height: 50vh;
   top: 50;
   display: flex;
   align-items: center;
